@@ -6,4 +6,4 @@ __The goal of this project__ <br />
 - *Control a multiagent fleet computation-efficiently*
 
 __Current Method__<br />
-- *Data driven control with the machine learning*<br />
+- *Data Driven Control with Machine learning*<br />
