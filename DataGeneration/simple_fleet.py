@@ -3,9 +3,7 @@ Project: Data driven control for the multiagent fleet
 Description: Simple multiagent models simulation for time-series data collection
 Author: Wenjian Hao
 Date: Sep/2021
-
 Models in this file comes from paper: https://ieeexplore.ieee.org/document/9261580
-
 '''
 import numpy as np 
 import joblib
@@ -50,16 +48,16 @@ u3[0] = u30
 #==================
 for i in range(sims):
     if i >= 2:
-        u1 = np.random.uniform(low=-5, high=5)
-        u3 = np.random.uniform(low=-5, high=5)
-        m1state[i] = m1state[i-2] * m1state[i-1] / (1 + m1state[i-2]**2 + m1state[i-1]**2) + 3*u1
-        m3state[i] = (m3state[i-2] * m3state[i-1] * u3 + u3)/(1+m3state[i-2]**2 + m3state[i-1]**2)
-        u1[i-1] = u1
-        u3[i-1] = u3
+        u1t = np.random.uniform(low=-5, high=5)
+        u3t = np.random.uniform(low=-5, high=5)
+        m1state[i] = m1state[i-2] * m1state[i-1] / (1 + m1state[i-2]**2 + m1state[i-1]**2) + 3*u1t
+        m3state[i] = (m3state[i-2] * m3state[i-1] * u3t + u3t)/(1+m3state[i-2]**2 + m3state[i-1]**2)
+        u1[i-1] = u1t
+        u3[i-1] = u3t
     if i >= 1:
-        u2 = np.random.uniform(low=-5, high=5)
-        u4 = np.random.uniform(low=-5, high=5)
-        m2state[i] = m2state[i-1]/(1+m2state[i-1]**4) + u2**4
-        m4state[i] = m4state[i-1] * u4 / (1+m4state[i-1]**4) +2*u4
-        u2[i-1] = u2
-        u4[i-1] = u4
+        u2t = np.random.uniform(low=-5, high=5)
+        u4t = np.random.uniform(low=-5, high=5)
+        m2state[i] = m2state[i-1]/(1+m2state[i-1]**4) + u2t**4
+        m4state[i] = m4state[i-1] * u4t / (1+m4state[i-1]**4) +2*u4t
+        u2[i-1] = u2t
+        u4[i-1] = u4t
