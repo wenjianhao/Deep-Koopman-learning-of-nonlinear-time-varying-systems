@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 # Parameters
 #==================
 # simulation time steps and trails
-sims = 120
-trails = 10
+sims = 200
+trails = 60
 # initial states for four models
 inim10 = 0
 inim11 = 0
@@ -35,14 +35,7 @@ u2= np.zeros(sims-1)
 u3 = np.zeros(sims-1)
 u4 = np.zeros(sims-1)
 state = np.zeros((8,trails*sims-trails))
-m1state[0] = inim10
-m1state[1] = inim11
-m2state[0] = inim2
-m3state[0] = inim30
-m3state[1] = inim31
-m4state[0] = inim4
-u1[0] = u10
-u3[0] = u30
+
 
 #==================
 # simulation
@@ -55,30 +48,73 @@ u1s = []
 u2s = []
 u3s = []
 u4s = []
+m1ss = []
+m2ss = []
+m3ss = []
+m4ss = []
+u1ss = []
+u2ss = []
+u3ss = []
+u4ss = []
+m1ss.append(inim10)
+m1ss.append(inim11)
+m2ss.append(inim2)
+m3ss.append(inim30)
+m3ss.append(inim31)
+m4ss.append(inim4)
+u1ss.append(u10)
+u3ss.append(u30)
 for j in range(trails):
-    for i in range(sims):
+    done = False
+    i = 0
+    m1state[0] = inim10
+    m1state[1] = inim11
+    m2state[0] = inim2
+    m3state[0] = inim30
+    m3state[1] = inim31
+    m4state[0] = inim4
+    u1[0] = u10
+    u3[0] = u30
+    while not done and i < 200: 
         if i >= 2:
-            u1t = np.random.uniform(low=-1, high=3)
-            u3t = np.random.uniform(low=-1, high=3)
-            m1state[i] = m1state[i-2] * m1state[i-1] / (1 + m1state[i-2]**2 + m1state[i-1]**2) + 3*u1t
-            m3state[i] = (m3state[i-2] * m3state[i-1] * u3t + u3t)/(1+m3state[i-2]**2 + m3state[i-1]**2)
+            u1t = np.random.uniform(low=0, high=3)
+            u3t = np.random.uniform(low=0, high=3)
+            m1state[i] = m1state[i-2] * m1state[i-1] / (1 + (m1state[i-2])**2 + (m1state[i-1])**2) + 3*u1t
+            m3state[i] = (m3state[i-2] * m3state[i-1] * u3t + u3t)/((1+m3state[i-2])**2 + (m3state[i-1])**2)
             u1[i-1] = u1t
             u3[i-1] = u3t
+            m1ss.append(m1state[i])
+            m3ss.append(m3state[i])
+            u1ss.append(u1t)
+            u3ss.append(u3t)
+            
         if i >= 1:
-            u2t = np.random.uniform(low=-1, high=2)
-            u4t = np.random.uniform(low=-1, high=3)
-            m2state[i] = m2state[i-1]/(1+m2state[i-1]**4) + u2t**4
-            m4state[i] = m4state[i-1] * u4t / (1+m4state[i-1]**4) +2*u4t
+            u2t = np.random.uniform(low=0, high=3)
+            u4t = np.random.uniform(low=0, high=3)
+            m2state[i] = m2state[i-1]/(1+(m2state[i-1])**4) + (u2t)**4
+            m4state[i] = m4state[i-1] * u4t / (1+(m4state[i-1])**4) + 2*u4t
             u2[i-1] = u2t
             u4[i-1] = u4t
-    m1s.append(m1state[0:(sims-1)])
-    m2s.append(m2state[0:(sims-1)])
-    m3s.append(m3state[0:(sims-1)])
-    m4s.append(m4state[0:(sims-1)])
-    u1s.append(u1)
-    u2s.append(u2)
-    u3s.append(u3)
-    u4s.append(u4)
+            m2ss.append(m2state[i])
+            m4ss.append(m4state[i])
+            u2ss.append(u2t)
+            u4ss.append(u4t)
+        
+        if i>1 and (i >= sims or m1state[i] < 0 or m2state[i] < 0 or m3state[i] < 0 or m4state[i] < 0 \
+                    or (m1state[i] == m2state[i] !=0) or (m1state[i] == m3state[i]!=0) \
+                        or (m1state[i] == m4state[i]!=0) or (m2state[i] == m3state[i]!=0) \
+                            or (m2state[i] == m4state[i]!=0) or (m3state[i] == m4state[i]!=0)):
+            done = True
+            print(i)
+        i += 1
+m1s.append(m1state[0:(sims-1)])
+m2s.append(m2state[0:(sims-1)])
+m3s.append(m3state[0:(sims-1)])
+m4s.append(m4state[0:(sims-1)])
+u1s.append(u1)
+u2s.append(u2)
+u3s.append(u3)
+u4s.append(u4)
 
 # plot one game traj
 fig0 = plt.figure(figsize=(8,6))
@@ -94,9 +130,9 @@ plt.legend(loc='upper right', prop={'size': 8})
 plt.title('One trail trajectory during data collecting',fontsize=12,color='black')
 
 state[0,:] = np.squeeze(np.array([m1s]).reshape(1,-1))
-state[1,:] = np.squeeze(np.array([m2s]).reshape(1,-1))
-state[2,:] = np.squeeze(np.array([m3s]).reshape(1,-1))
-state[3,:] = np.squeeze(np.array([m4s]).reshape(1,-1))
+state[1,:] = np.squeeze(np.array([m2s]).reshape(1,-1)) - state[0,:]
+state[2,:] = np.squeeze(np.array([m3s]).reshape(1,-1)) - state[0,:]
+state[3,:] = np.squeeze(np.array([m4s]).reshape(1,-1)) - state[0,:]
 state[4,:] = np.squeeze(np.array([u1s]).reshape(1,-1))
 state[5,:] = np.squeeze(np.array([u2s]).reshape(1,-1))
 state[6,:] = np.squeeze(np.array([u3s]).reshape(1,-1))
