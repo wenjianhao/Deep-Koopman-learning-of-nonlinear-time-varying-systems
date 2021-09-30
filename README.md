@@ -10,5 +10,5 @@ __Current Method__<br />
 
 __3 Folders__<br />
 - *Data Collecting*<br />
-- *Deep Koopman Training and Optimal Control designing (Working on building our own private controller packages, casadi versions) [MPC finished]*<br />
+- *Deep Koopman Training and Optimal Control designing (Working on building our own private controller packages, casadi versions) [MPC, LQR, FiniteLQR, finished]*<br />
 - *Plots for papers (Making it a private package)*<br />
