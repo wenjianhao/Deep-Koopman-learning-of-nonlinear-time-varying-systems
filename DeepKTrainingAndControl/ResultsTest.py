@@ -23,7 +23,7 @@ from SimpleFleetEnv import SimpleFleet
 # load files and model
 load_name = 'SavedResults/liftnetwork.pth'
 checkpoint = torch.load(load_name)
-model = LNN()
+model = LNN(4,16)
 model.load_state_dict(checkpoint['model_lifting'])
 A = joblib.load('SavedResults/A.pkl')
 B = joblib.load('SavedResults/B.pkl')
@@ -42,7 +42,7 @@ class TEST():
         self.B = np.matrix(B)
         self.C = np.matrix(C)        
         # define weighting structure
-        Q = np.diag([2,2,2,2])
+        Q = np.diag([2,3,3,3])
         Q_lifted = self.C.T .dot(Q).dot(self.C)       
         Qf = Q_lifted * 2 # weight matrix for terminal state
         R = np.diag([1,1,1,1])
@@ -81,18 +81,17 @@ class TEST():
             step = 0
             traj_each = []
             lifteach = []
+            s1, s2, s3, s4 = np.array([inim10, inim2, inim30, inim4])
+            cur_state = np.array([s1, s2-s1, s3-s1, s4-s1])
+            goalstate = np.array([5,10,2,2])
+            goalstate = torch.from_numpy(goalstate.T).float()
+            goal_state_lifted = model.forward(goalstate).cpu().detach().numpy()
             while not done:
                 for k in range(time_execute):
-                    # get current state
-                    cur_state = np.array([
-                        observation[0],
-                        observation[1],
-                        observation[2]
-                        ])
                     # lift current states
                     cur_input_tensor = torch.from_numpy(cur_state.T).float()
                     cur_state_lifted = model.forward(cur_input_tensor).cpu().detach().numpy()
-                    cur_state_lifted = cur_state_lifted
+                    cur_state_lifted = cur_state_lifted - goal_state_lifted
                     # mpc planning
                     if k==0:
                         try:
@@ -100,24 +99,22 @@ class TEST():
                         except:
                             done = True
                     # opt_u_list = u_mpc[0][k]
-                    opt_u_list = u_mpc[0]
+                    opt_u_list = u_mpc[:,0]
                     # record data
                     lifteach.append(cur_state_lifted)
                     # step the game
-                    s1, s2, s3, s4, done = self.env.step([opt_u_list], step)
+                    s1, s2, s3, s4, done = self.env.sim([opt_u_list], step)
+                    cur_state = np.array([s1, s2-s1, s3-s1, s4-s1])
                     print(opt_u_list)     
+
                     self.total_steps += 1                
                     step += 1
 
             numgames.append(i)
             gamereward.append(score)
-            stepreward.append(reward)
             totalsteps.append(self.total_steps)
             traj.append(traj_each)
             liftstate.append(lifteach)
-
-        # plot reward according to behavior
-        print('reward mean is: ', np.array(gamereward).mean())
         #================================================================================
         # Figures Plotting
         #================================================================================
@@ -370,6 +367,4 @@ class TEST():
 
 # choose a controller
 if __name__=='__main__':
-    # run = FINITE_LQR()
-    # run = INFINITE_LQR()
-    run = MPC()
+    run = TEST()
