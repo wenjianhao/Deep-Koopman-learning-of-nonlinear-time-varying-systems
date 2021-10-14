@@ -22,7 +22,8 @@ from SimpleFleetEnv import SimpleFleet
 
 # load files and model
 load_name = 'SavedResults/liftnetwork.pth'
-checkpoint = torch.load(load_name)
+# checkpoint = torch.load(load_name)
+checkpoint = torch.load(load_name,map_location=torch.device('cpu'))
 model = LNN(4,16)
 model.load_state_dict(checkpoint['model_lifting'])
 A = joblib.load('SavedResults/A.pkl')
@@ -36,7 +37,7 @@ class TEST():
         # set parameters
         #===============================================
         NUM_STATE = 2
-        time_horizon = 6
+        time_horizon = 20
         time_execute = 1
         self.A = np.matrix(A)
         self.B = np.matrix(B)
@@ -71,7 +72,7 @@ class TEST():
         totalsteps = []
         gamereward = []
         numgames = []
-        Ngames = 6
+        Ngames = 1
         traj = []
         liftstate = []
         
@@ -81,12 +82,12 @@ class TEST():
             step = 0
             traj_each = []
             lifteach = []
-            s1, s2, s3, s4 = np.array([inim10, inim2, inim30, inim4])
+            s1, s2, s3, s4 = np.array([inim10, inim2-inim10, inim30-inim10, inim4-inim10])
             cur_state = np.array([s1, s2-s1, s3-s1, s4-s1])
             goalstate = np.array([5,10,2,2])
             goalstate = torch.from_numpy(goalstate.T).float()
             goal_state_lifted = model.forward(goalstate).cpu().detach().numpy()
-            while not done:
+            while not done and step < sims:
                 for k in range(time_execute):
                     # lift current states
                     cur_input_tensor = torch.from_numpy(cur_state.T).float()
@@ -105,6 +106,7 @@ class TEST():
                     # step the game
                     s1, s2, s3, s4, done = self.env.sim([opt_u_list], step)
                     cur_state = np.array([s1, s2-s1, s3-s1, s4-s1])
+                    traj_each.append(cur_state)
                     print(opt_u_list)     
 
                     self.total_steps += 1                
@@ -115,255 +117,39 @@ class TEST():
             totalsteps.append(self.total_steps)
             traj.append(traj_each)
             liftstate.append(lifteach)
+    
         #================================================================================
         # Figures Plotting
         #================================================================================
         trajectories = np.array(traj)
         # trajectories = trajectories.T
-        traj_plot = False
+        traj_plot = True
         if traj_plot:
-            gamereward = np.array(gamereward).reshape(-1,1)
-            fig0 = plt.figure(figsize=(8,6))
-            plt.subplot(1,1,1)
-            plt.plot(numgames, gamereward, label='trend')
-            plt.xlabel("game",fontsize=12)
-            plt.ylabel("reward",fontsize=12)
-            # plt.title('Reward of each game by deploying Deep_EDMD',fontsize=12,color='r')
-            # 3d cos sin and theta dot
-            fig200 = plt.figure(figsize=(6,9))
+            fig1 = plt.figure(figsize=(8,6))
             for j in range(Ngames):
                 # trajectory = np.array(trajectories[j])
-                theta20 = []
-                dtheta20 = []
-                ctr = []
-                time = []
-                time_step = 0
+                agent1 = []
+                agent2 = []
+                agent3 = []
+                agent4 = []
                 for s in trajectories[j]:
-                    if s[1] < 0 and s[0] < 0:
-                        realtheta = -np.arccos(s[0]) + 2*np.pi # map with '+2pi'
-                    if s[1] < 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                        if realtheta < -0.4:
-                            realtheta = np.arcsin(s[1]) + 2*np.pi # map with '+2pi'
-                    if s[1] > 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                    if s[1] > 0 and s[0] < 0:
-                        realtheta = np.arccos(s[0])           
-                    if s[1] == 0 and s[0] == 1:
-                        realtheta = 0
-                    if s[1] == 0 and s[0] == -1:
-                        realtheta = np.pi
-                    if s[1] == 1 and s[0] == 0:
-                        realtheta = np.pi/2
-                    if s[1] == -1 and s[0] == 0:
-                        realtheta = -np.pi/2 + 2*np.pi # map with '+2pi'
-                    
-                    theta20.append(realtheta)
-                    dtheta20.append(s[2])
-                    time.append(time_step)
-                    time_step += 1
-                    ctr.append(s[3])
+                    agent1.append(s[0])
+                    agent2.append(s[1]+s[0])
+                    agent3.append(s[2]+s[0])
+                    agent4.append(s[3]+s[0])
 
-                plt.subplot(3,1,1)
-                plt.plot(time, theta20)#, c='r')
-                plt.xlabel('time', fontsize=12)#, color='r')
-                plt.ylabel('theta', fontsize=12)
-
-                plt.subplot(3,1,2)
-                plt.plot(time, dtheta20)#, c='r')
-                plt.xlabel('time', fontsize=12)#, color='r')
-                plt.ylabel('theta dot', fontsize=12)
-
-                plt.subplot(3,1,3)
-                plt.plot(time, ctr)#, c='r')
-                plt.xlabel('time', fontsize=12)#, color='r')
-                plt.ylabel('control', fontsize=12)
-
-            # # 3d cos sin and theta dot
-            # fig201= plt.figure(figsize=(6,6))
-            # for j in range(Ngames):
-            #     # trajectory = np.array(trajectories[j])
-            #     ctr = []
-            #     time = []
-            #     time_step = 0
-            #     for s in trajectories[j]:
-            #         ctr.append(s[3])
-            #         time.append(time_step)
-            #         time_step += 1
-
-            #     plt.subplot(1,1,1)
-            #     plt.plot(time, ctr)#, c='r')
-            #     plt.xlabel('time', fontsize=12)#, color='r')
-            #     plt.ylabel('control', fontsize=12)
-
-
-            
-            fig00 = plt.figure(figsize=(6,6))
-            for i in range(Ngames):
-                theta = []
-                velo = []
-                energy = []
-                for s in trajectories[i]:
-                    if s[1] < 0 and s[0] < 0:
-                        realtheta = -np.arccos(s[0]) #+ 2*np.pi # map with '+2pi'
-                    if s[1] < 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                        # if realtheta < -0.4:
-                        #     realtheta = np.arcsin(s[1]) + 2*np.pi # map with '+2pi'
-                    if s[1] > 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                    if s[1] > 0 and s[0] < 0:
-                        realtheta = np.arccos(s[0])           
-                    if s[1] == 0 and s[0] == 1:
-                        realtheta = 0
-                    if s[1] == 0 and s[0] == -1:
-                        realtheta = np.pi
-                    if s[1] == 1 and s[0] == 0:
-                        realtheta = np.pi/2
-                    if s[1] == -1 and s[0] == 0:
-                        realtheta = -np.pi/2 #+ 2*np.pi # map with '+2pi'
-                    ge = 0.5*s[2]**2 + s[0] + s[3]
-                    theta.append(realtheta)
-                    velo.append(s[2])
-                    energy.append(ge)
                 plt.subplot(1,1,1)
-                plt.scatter(theta,velo,c=energy, cmap='jet')
-                im00 = plt.scatter(theta, velo, c=energy, cmap='jet')
-                plt.xlim((-np.pi,np.pi))
-                # plt.xlim((-1,2*np.pi))
-                plt.ylim((-8,8))
-                plt.xlabel('theta',fontsize=10)
-                plt.ylabel('theta dot',fontsize=10)
-                # plt.title('2D Trajectories',fontsize=25)
-                plt.plot(theta[0],velo[0], marker='*', markersize=16,c='r', label='start point') 
-                plt.plot(0,0, marker='*', markersize=16,c='black',label='goal position')
-            fig00.colorbar(im00)
-
-            # 3d cos sin and theta dot
-            fig2 = plt.figure(figsize=(8,6))
-            ax = fig2.add_subplot(111, projection='3d')
-            for j in range(Ngames):
-                # trajectory = np.array(trajectories[j])
-                cos = []
-                sin = []
-                tvelo = []
-                for point in trajectories[j]:
-                    cos.append(point[0])
-                    sin.append(point[1])
-                    tvelo.append(point[2])
-                ax.scatter(cos,sin,tvelo, s=100)#, c='r')
-                ax.plot(cos,sin,tvelo,linewidth=8)#, color='r')
-                ax.scatter(1,0,0, color='r',s=600)
-                ax.set_xlim3d(-1,1)
-                ax.set_ylim3d(-1,1)
-                ax.set_zlim3d(-8,8)
-                ax.set_zlabel('theta_dot',fontsize=20)
-                ax.set_ylabel('sin(theta)',fontsize=20)
-                ax.set_xlabel('cos(theta)',fontsize=20)
-                ax.set_title('3D trajectories',fontsize=25)
-            # 3d theta theta dot and control
-            fig3 = plt.figure(figsize=(12,6))
-            ax = fig3.add_subplot(121, projection='3d')
-            for k in range(Ngames):
-                # trajectory = np.array(trajectories[j])
-                theta_plt = []
-                dtheta = []
-                self.ctr = []
-                self.energy = []
-                for s in trajectories[k]:
-                    if s[1] < 0 and s[0] < 0:
-                        realtheta = -np.arccos(s[0]) + 2*np.pi # map with '+2pi'
-                    if s[1] < 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                        if realtheta < -0.4:
-                            realtheta = np.arcsin(s[1]) + 2*np.pi # map with '+2pi'
-                    if s[1] > 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                    if s[1] > 0 and s[0] < 0:
-                        realtheta = np.arccos(s[0])           
-                    if s[1] == 0 and s[0] == 1:
-                        realtheta = 0
-                    if s[1] == 0 and s[0] == -1:
-                        realtheta = np.pi
-                    if s[1] == 1 and s[0] == 0:
-                        realtheta = np.pi/2
-                    if s[1] == -1 and s[0] == 0:
-                        realtheta = -np.pi/2 + 2*np.pi # map with '+2pi'
-                    ge = 0.5*s[2]**2 + s[0] + s[3]
-                    theta_plt.append(realtheta)
-                    dtheta.append(s[2])
-                    self.ctr.append(s[3])
-                    self.energy.append(ge)
-                ax.plot_trisurf(theta_plt,dtheta,self.energy,cmap=plt.cm.winter)#,cmap=plt.cm.Spectral)#, c='r')
-                # ax.scatter(theta_plt,dtheta,self.energy)
-            ax.plot(theta_plt,dtheta,self.energy,linewidth=12)#, color='r')
-            ax.scatter(0,0,ge, color='r',s=600)
-            ax.set_zlabel('energy',fontsize=20)
-            ax.set_ylabel('theta dot',fontsize=20)
-            ax.set_xlabel('theta',fontsize=20)
-            ax.set_title('3d plot of theta, theta dot and energy',fontsize=25)
-
-            # 3d cos sin and theta dot
-            fig20 = plt.figure(figsize=(9,6))
-            ax = fig20.add_subplot(111, projection='3d')
-            for j in range(Ngames):
-                # trajectory = np.array(trajectories[j])
-                theta20 = []
-                dtheta20 = []
-                time = []
-                time_step = 0
-                for s in trajectories[j]:
-                    if s[1] < 0 and s[0] < 0:
-                        realtheta = -np.arccos(s[0]) + 2*np.pi # map with '+2pi'
-                    if s[1] < 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                        if realtheta < -0.4:
-                            realtheta = np.arcsin(s[1]) + 2*np.pi # map with '+2pi'
-                    if s[1] > 0 and s[0] > 0:
-                        realtheta = np.arcsin(s[1])
-                    if s[1] > 0 and s[0] < 0:
-                        realtheta = np.arccos(s[0])           
-                    if s[1] == 0 and s[0] == 1:
-                        realtheta = 0
-                    if s[1] == 0 and s[0] == -1:
-                        realtheta = np.pi
-                    if s[1] == 1 and s[0] == 0:
-                        realtheta = np.pi/2
-                    if s[1] == -1 and s[0] == 0:
-                        realtheta = -np.pi/2 + 2*np.pi # map with '+2pi'
-                    
-                    theta20.append(realtheta)
-                    dtheta20.append(s[2])
-                    time.append(time_step)
-                    time_step += 1
-                ax.scatter(time, theta20, dtheta20, s=100)#, c='r')
-                im201 = ax.scatter(time, theta20, dtheta20, s=100, c=self.energy, cmap='jet')#, c='r')
-                ax.plot(time, theta20, dtheta20, linewidth=6)#, color='r')
-                ax.scatter(time_step,0,0,color='r',s=600)
-                ax.set_zlabel('theta_dot',fontsize=20)
-                ax.set_ylabel('theta',fontsize=20)
-                ax.set_xlabel('time',fontsize=20)
-            fig20.colorbar(im201)
-            # plot psi1 psi2 
-            ax = fig3.add_subplot(122, projection='3d')
-            for j in range(Ngames):
-                psi6 = []
-                psi7 = []
-                for s in liftstate[j]:
-                    psi6.append(s[5])
-                    psi7.append(s[6])
-                
-                ax.plot_trisurf(psi6, psi7, self.energy, cmap=plt.cm.winter)
-                # ax.scatter(psi6,psi7,self.energy, s=100)
-            ax.plot(psi6,psi7,self.energy,linewidth=12)
-            ax.scatter(s[5],s[6], color='r',s=600)
-            ax.set_zlabel('control',fontsize=20)
-            ax.set_ylabel('psi2',fontsize=20)
-            ax.set_xlabel('psi1',fontsize=20)
-            ax.set_title('3d plot of psi1, psi2 and control',fontsize=25)
+                # plt.plot(m1s[3], label='agent1')
+                plt.plot(agent1, label='agent1')
+                plt.plot(agent2, label='agent2')
+                plt.plot(agent3, label='agent3')
+                plt.plot(agent4, label='agent4')
+                plt.xlabel("time steps",fontsize=12)
+                plt.ylabel("agent position",fontsize=12)
+                plt.legend(loc='upper right', prop={'size': 8})
+                plt.title('One Test Trail Trajectory',fontsize=12,color='black')
 
         plt.show()
-        self.env.close()
 
 # choose a controller
 if __name__=='__main__':
