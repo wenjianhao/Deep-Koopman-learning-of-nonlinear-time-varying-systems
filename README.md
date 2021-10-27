@@ -2,6 +2,9 @@
 
 **This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
 
+__Third Dependencies__ <br />
+- *Numpy, Pytorch, Casadi,*
+
 __The goal of this project__ <br />
 - *Optimal Control for time-variant systems using data driven method*
 
