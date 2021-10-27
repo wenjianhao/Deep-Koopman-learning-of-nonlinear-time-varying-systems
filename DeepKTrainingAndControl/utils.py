@@ -119,15 +119,21 @@ class DKRC_training():
           XU = np.append(X_lift_table,U_table, axis=0)
           G = XU * (XU.T)
           V = Y_lift_table * (XU.T)
-          M = V * np.linalg.pinv(G)          
+          M = V * np.linalg.pinv(G)     
+          # get the A,B,C matrix     
           A = M[:, 0:self.dim_lifting]
           B = M[:, self.dim_lifting:(self.dim_lifting+self.dim_control)]
           A_mat = torch.FloatTensor(A).to(training_device)
           B_mat = torch.FloatTensor(B).to(training_device)
+          C_mat = torch.matmul(trset.T, torch.linalg.pinv(x_t_lift).T).to(training_device)
+          D_mat = torch.zeros(C_mat.shape[0], B_mat.shape[1]).to(training_device)
+          AB_mat = torch.cat((A_mat,B_mat),1)
+          CD_mat = torch.cat((C_mat, D_mat),1)
+          ABCD_mat = torch.cat((AB_mat, CD_mat), 0)
           #==================================
           
           # loss1 is the linear lifting loss
-          loss1 = self.linearize_loss(A_mat, B_mat, x_t_lift, x_t1_lift, tru)
+          loss1 = self.linearize_loss(ABCD_mat, x_t_lift, x_t1_lift, trset, tru)
           # loss2 ensures a controllable new lifted linear system
           rank, loss2 = self.controllability_loss(A, B)
           # get the complete loss 
@@ -147,7 +153,7 @@ class DKRC_training():
             vx_t_lift = lifting(vlset)
             vx_t1_lift = lifting(vllab)
             # validation loss1
-            vloss1 = self.linearize_loss(A_mat, B_mat, vx_t_lift, vx_t1_lift, vlu)
+            vloss1 = self.linearize_loss(ABCD_mat, vx_t_lift, vx_t1_lift, vlset, vlu)
             # loss3 is the decoder loss
             vtotal_loss = vloss1 + loss2
 
@@ -167,9 +173,6 @@ class DKRC_training():
                   state = {'model_lifting': lifting.state_dict()}
                   torch.save(state, (self.data_path+self.model_saved_name))
 
-                  # get the C matrix
-                  C = np.matrix(trset.cpu().detach().numpy().T) * np.linalg.pinv(x_t_lift.cpu().detach().numpy().T)
-
                   # plot the identity matrices
                   # print('A matrix is: ' + '\n', A)
                   # print('B matrix is: ' + '\n', B)
@@ -183,7 +186,7 @@ class DKRC_training():
                   filename_c = self.data_path + 'C.pkl'
                   joblib.dump(A, filename_a)
                   joblib.dump(B, filename_b) 
-                  joblib.dump(C, filename_c)
+                  joblib.dump(C_mat.cpu().detach().numpy(), filename_c)
                   print("Saved min loss model, loss: ", total_loss.cpu().detach().numpy())
 
       # visualize training process
@@ -230,10 +233,18 @@ class DKRC_training():
     #=====================
     # loss functions
     #=====================
-    def linearize_loss(self, A_mat, B_mat, x_t_lift, x_t1_lift, tru):
-      prediction = A_mat @ torch.transpose(x_t_lift,0,1) + B_mat @ torch.transpose(tru,0,1)
+    # def linearize_loss(self, A_mat, B_mat, x_t_lift, x_t1_lift, tru):
+    #   prediction = A_mat @ torch.transpose(x_t_lift,0,1) + B_mat @ torch.transpose(tru,0,1)
+    #   lossfunc = torch.nn.MSELoss()
+    #   loss1 = lossfunc(prediction, torch.transpose(x_t1_lift,0,1))
+    #   return loss1
+
+    def linearize_loss(self, ABCD_mat, x_t_lift, x_t1_lift, trset, tru):
+      label = torch.cat((x_t1_lift.T, trset.T), 0)
+      trainset = torch.cat((x_t_lift.T, tru.T), 0)
+      prediction = ABCD_mat @ trainset
       lossfunc = torch.nn.MSELoss()
-      loss1 = lossfunc(prediction, torch.transpose(x_t1_lift,0,1))
+      loss1 = lossfunc(prediction, label)
       return loss1
 
     def controllability_loss(self, A, B):
