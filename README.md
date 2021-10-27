@@ -3,7 +3,7 @@
 **This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
 
 __The goal of this project__ <br />
-- *Control a multiagent fleet computation-efficiently*
+- *Optimal Control for time-variant systems using data driven method*
 
 __Current Method__<br />
 - *Data Driven Control with Machine learning*<br />
