@@ -15,3 +15,7 @@ __3 Folders__<br />
 - *Data Collecting*<br />
 - *Deep Koopman Training and Optimal Control designing (Working on building our own private controller packages, casadi versions) [MPC, LQR, FiniteLQR, finished]*<br />
 - *Plots for papers (Making it a private package)*<br />
+
+__Things to do in the Nov__<br />
+- *Proof: As the parameters of NN lifting go to the infinity, the K will converge*<br />
+- *Proof: Convergence of the time variant system*<br />
