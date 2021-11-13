@@ -17,7 +17,7 @@ __3 Folders__<br />
 - *Plots for papers (Making it a private package)*<br />
 
 __Things to do in the Nov__<br />
-- *Proof: As the parameters of NN lifting go to the infinity, the K will converge*<br />
-- *Proof: Convergence of the time variant system*<br />
+- *[To Do] Proof: As the parameters of NN lifting go to the infinity, the K will converge*<br />
+- *Proof: Convergence of the time variant system (Not neccessary)*<br />
 - *Lemma 1: As we get the new data, the new approxmated k is related to the previous k matrix (Done)*<br />
-- *Lemma 2: Place the weight for the data, by the order of the time*<br />
+- *Lemma 2: Place the weight for the data, by the order of the time (Done)*<br />
