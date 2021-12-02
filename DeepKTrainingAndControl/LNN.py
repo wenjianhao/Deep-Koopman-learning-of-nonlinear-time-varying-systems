@@ -1,7 +1,7 @@
 '''
 ===================================================================================
 Description: Models used for kernel linerization of koopman operator
-Project: Data driven control for the multiagent fleet
+Project: Deep Koopman Representation for Time-varying Systems
 Author: Wenjian Hao, Purdue University
 
 Version: Sep / 2021
