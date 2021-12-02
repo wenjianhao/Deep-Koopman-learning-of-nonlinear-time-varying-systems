@@ -6,18 +6,19 @@ __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi,*
 
 __The goal of this project__ <br />
-- *Optimal Control for time-variant systems using data driven method*
+- *Design the Optimal Control for Time-varying systems*
 
 __Current Method__<br />
-- *Data Driven Control with Machine learning*<br />
+- *Machine Learning and Koopman Operator*<br />
 
 __3 Folders__<br />
 - *Data Collecting*<br />
 - *Deep Koopman Training and Optimal Control designing (Working on building our own private controller packages, casadi versions) [MPC, LQR, FiniteLQR, finished]*<br />
 - *Plots for papers (Making it a private package)*<br />
 
+__Things have achieved__<br />
+- *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
+- *Theorem 2: Error Boundary (Done)*<br />
+- 
 __Things to do in the Nov__<br />
-- *[To Do] Proof: As the parameters of NN lifting go to the infinity, the K will converge*<br />
-- *Proof: Convergence of the time variant system (Not neccessary)*<br />
-- *Lemma 1: As we get the new data, the new approxmated k is related to the previous k matrix (Done)*<br />
-- *Lemma 2: Place the weight for the data, by the order of the time (Done)*<br />
+- *Add time weights during the training process*<br />
