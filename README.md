@@ -1,4 +1,4 @@
-# Data Driven Control for Time-Varying Systems
+# Deep Koopman Representation for Time-varying Systems
 
 **This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
 
@@ -19,6 +19,6 @@ __3 Folders__<br />
 __Things have achieved__<br />
 - *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
 - *Theorem 2: Error Boundary (Done)*<br />
-- 
+
 __Things to do in the Nov__<br />
 - *Add time weights during the training process*<br />
