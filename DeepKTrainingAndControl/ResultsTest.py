@@ -1,7 +1,7 @@
 '''
 ===================================================================================
 Description: Result Test
-Project: Data driven control for the multiagent fleet
+Project: Deep Koopman Representation for Time-varying Systems
 Author: Wenjian Hao, Purdue University
 
 Version: Sep / 2021
