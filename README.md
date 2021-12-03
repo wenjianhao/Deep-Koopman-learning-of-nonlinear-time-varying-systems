@@ -20,5 +20,5 @@ __Things have achieved__<br />
 - *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
 - *Theorem 2: Error Boundary (Done)*<br />
 
-__Things to do in the Nov__<br />
+__Things to do__<br />
 - *Add time weights during the training process*<br />
