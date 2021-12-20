@@ -119,7 +119,7 @@ class DKRC_training():
           XU = np.append(X_lift_table,U_table, axis=0)
           G = XU * (XU.T)
           V = Y_lift_table * (XU.T)
-          M = V * np.linalg.pinv(G)     
+          M = V * np.linalg.inv(G)     
           # get the A,B,C matrix     
           A = M[:, 0:self.dim_lifting]
           B = M[:, self.dim_lifting:(self.dim_lifting+self.dim_control)]
