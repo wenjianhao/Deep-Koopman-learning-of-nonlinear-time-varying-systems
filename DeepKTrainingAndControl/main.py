@@ -29,6 +29,14 @@ import os
 import argparse
 from utils import DKRC_training
 
+#=====================
+# Initialize the sim env
+#=====================
+x0 = [1, 0]
+dt = 0.1
+SimTime = 100
+env = ToyEx(x0, SimTime, dt)
+x, y, groundt = env.sim()
 
 #=====================
 # Action
