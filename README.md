@@ -1,4 +1,4 @@
-# Deep Koopman Representation for Time-varying Systems
+# Deep Koopman Representation for Nonlinear Time-varying Systems
 
 **This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
 
@@ -6,7 +6,7 @@ __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi,*
 
 __The goal of this project__ <br />
-- *Design the Optimal Control for Time-varying systems*
+- *Design the Optimal Controller for Nonlinear Time-varying systems*
 
 __Current Method__<br />
 - *Machine Learning and Koopman Operator*<br />
