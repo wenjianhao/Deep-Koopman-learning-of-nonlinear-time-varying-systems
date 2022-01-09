@@ -17,6 +17,8 @@ Finite LQR:
 Infinite LQR:
     1. PCTINFLQR(A, B, C, Q, R)
     2. compute_policy_gains(x)
+To Add
+...
 ===================================================================================
 """
 import scipy
