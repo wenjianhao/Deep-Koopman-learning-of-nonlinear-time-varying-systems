@@ -15,7 +15,7 @@ __Current Method__<br />
 
 __2 Folders__<br />
 - *Data Generating*<br />
-- *Deep Koopman Training and Optimal Control designing \(Working on building our own private controller packages, casadi versions) [MPC, LQR, FiniteLQR, finished]*<br />
+- *Deep Koopman Training and Optimal Control designing <br/> (Working on building our own private controller packages, casadi versions) [MPC, LQR, FiniteLQR, finished]*<br />
 
 __Things have achieved__<br />
 - *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
