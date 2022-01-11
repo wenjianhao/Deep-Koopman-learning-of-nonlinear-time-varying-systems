@@ -3,7 +3,9 @@
 **This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
 
 __Third Dependencies__ <br />
-- *Numpy, Pytorch, Casadi,*
+- *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
+- *Windows Or Ubuntu*
+- *Python*
 
 __The goal of this project__ <br />
 - *Design the Optimal Controller for Nonlinear Time Varying systems (NTVS)*
