@@ -75,6 +75,7 @@ class CartPoleEnv(gym.Env):
 
         # Angle at which to fail the episode
         self.theta_threshold_radians = 12 * 2 * math.pi / 360
+        # self.theta_threshold_radians = 12 * 2 * math.pi / 90
         self.x_threshold = 2.4
 
         # Angle limit set to 2 * theta_threshold_radians so failing observation
@@ -102,12 +103,17 @@ class CartPoleEnv(gym.Env):
         self.np_random, seed = seeding.np_random(seed)
         return [seed]
 
-    def step(self, action):
-        err_msg = "%r (%s) invalid" % (action, type(action))
-        assert self.action_space.contains(action), err_msg
+    def step(self, input):
+        action = np.array([input.item(0)]).squeeze()
+        # err_msg = "%r (%s) invalid" % (action, type(action))
+        # assert self.action_space.contains(action), err_msg
 
+        timestep = input[1]
+        self.muc += .3*np.cos(timestep*self.tau)
         x, x_dot, theta, theta_dot = self.state
-        force = self.force_mag if action == 1 else -self.force_mag
+        theta = angle_normalize(theta)
+        # force = self.force_mag if action == 1 else -self.force_mag
+        force = action
         costheta = math.cos(theta)
         sintheta = math.sin(theta)
 
@@ -134,11 +140,14 @@ class CartPoleEnv(gym.Env):
 
         self.state = (x, x_dot, theta, theta_dot)
 
+        # done = bool(
+        #     x < -self.x_threshold
+        #     or x > self.x_threshold
+        #     or theta < -self.theta_threshold_radians
+        #     or theta > self.theta_threshold_radians
+        # )
         done = bool(
-            x < -self.x_threshold
-            or x > self.x_threshold
-            or theta < -self.theta_threshold_radians
-            or theta > self.theta_threshold_radians
+            timestep > 60
         )
 
         if not done:
@@ -158,11 +167,13 @@ class CartPoleEnv(gym.Env):
             self.steps_beyond_done += 1
             reward = 0.0
 
-        return np.array(self.state, dtype=np.float32), reward, done, {}
+        return np.array(self.state, dtype=np.float32), reward, done, self.muc
 
     def reset(self):
-        self.state = self.np_random.uniform(low=-0.05, high=0.05, size=(4,))
+        # self.state = self.np_random.uniform(low=-0.05, high=0.05, size=(4,))
+        self.state = np.array([0,0, 0.02, 0])
         self.steps_beyond_done = None
+        self.muc = 0.0005 # coefficient of friction of cart on track
         return np.array(self.state, dtype=np.float32)
 
     def render(self, mode="human"):
@@ -234,3 +245,18 @@ class CartPoleEnv(gym.Env):
         if self.viewer:
             self.viewer.close()
             self.viewer = None
+    
+def angle_normalize(x):
+    return ((x + np.pi) % (2 * np.pi)) - np.pi
+
+# def angle_normalize(angle):
+#     """
+#     3*pi gives -pi, 4*pi gives 0 etc, etc. (returns the negative difference
+#     from the closest multiple of 2*pi)
+#     """
+#     normalized_angle = abs(angle)
+#     normalized_angle = normalized_angle % (2*np.pi)
+#     if normalized_angle > np.pi:
+#         normalized_angle = normalized_angle - 2*np.pi
+#     normalized_angle = abs(normalized_angle)
+#     return normalized_angle
