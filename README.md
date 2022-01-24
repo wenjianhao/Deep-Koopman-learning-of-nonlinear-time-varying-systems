@@ -21,6 +21,7 @@ __Things have achieved__<br />
 - *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
 - *Theorem 2: Error Boundary (Done)*<br />
 - *Simulation for NTVS identification (Done)*<br />
+- *Simulation for Cartpole with time-varying friction coefficient of the ground (Done)*<br />
 
 __Things to do__<br />
-- *Simulation for Cartpole with time-varying friction coefficient of the ground*<br />
+- *Journal Submission*<br />
