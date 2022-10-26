@@ -22,6 +22,3 @@ __Things have achieved__<br />
 - *Theorem 2: Error Boundary (Done)*<br />
 - *Simulation for NTVS identification (Done)*<br />
 - *Simulation for Cartpole with time-varying friction coefficient of the ground (Done)*<br />
-
-__Things to do__<br />
-- *Journal Submission*<br />
