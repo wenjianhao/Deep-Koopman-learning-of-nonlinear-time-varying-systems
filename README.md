@@ -15,13 +15,11 @@ __Description__ <br />
   publisher={Elsevier}
 }.*
 
-__Third Dependencies__ <br />
-- *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
-- *Windows Or Ubuntu Or Macos*
-- *Python*
-
-__The goal of this project__ <br />
+- __The goal of this project__ <br />
 - *To learn the dynamics of various nonlinear time-varying systems (NTVS)*
+
+__Third Dependencies__ <br />
+- *torch, numpy, os, scipy, matplotlib, joblib*
 
 __Method theory__<br />
 - *Koopman Operator and deep learning*<br />
