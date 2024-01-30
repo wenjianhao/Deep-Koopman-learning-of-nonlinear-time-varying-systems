@@ -3,19 +3,29 @@
 __Description__ <br />
 - *Started at 09/2021, last Revision: Jan 2022.*
 - **Author: Wenjian Hao, PhD, AAE, Purdue University.**
+- *This code is about the first example in the paper, readers can refine the codes accordingly based on their research.*
+- *If the paper or codes help your research or other projects please cite @article{hao2024deep,
+  title={Deep Koopman learning of nonlinear time-varying systems},
+  author={Hao, Wenjian and Huang, Bowen and Pan, Wei and Wu, Di and Mou, Shaoshuai},
+  journal={Automatica},
+  volume={159},
+  pages={111372},
+  year={2024},
+  publisher={Elsevier}
+}.*
 
 __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
-- *Windows Or Ubuntu*
+- *Windows Or Ubuntu Or Macos*
 - *Python*
 
 __The goal of this project__ <br />
-- *Learn the dynamics of nonlinear time-varying systems (NTVS)*
+- *To learn the dynamics of various nonlinear time-varying systems (NTVS)*
 
 __Method theory__<br />
 - *Koopman Operator and deep learning*<br />
 
-__2 Folders__<br />
+__Usage__<br />
 - *Data Generating*<br />
 - *Deep Koopman Training and Optimal Control designing <br/> (Working on building our own private controller packages, casadi versions) [Have finished {MPC, LQR, FiniteLQR}]*<br />
 
