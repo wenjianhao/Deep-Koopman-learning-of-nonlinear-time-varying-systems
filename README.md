@@ -17,7 +17,7 @@ __Description__ <br />
 
 - __The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS)__ <br />
 
-__Third Dependencies__ <br />
+__Dependencies__ <br />
 - *torch, numpy, os, scipy, matplotlib, joblib*
 
 __Method theory__<br />
