@@ -25,11 +25,11 @@ __Method theory__<br />
 - *Koopman Operator and deep learning*<br />
 
 __Usage__<br />
-- *Data Generating*<br />
-- *Deep Koopman Training and Optimal Control designing <br/> (Working on building our own private controller packages, casadi versions) [Have finished {MPC, LQR, FiniteLQR}]*<br />
+- *Parameters are defined in config.py*<br />
+- *In folder '/SavedResults/', we include the plots data of the published paper, in particular, /SavedResults/SavedResults08/ contains the plots data with changing rate \gamma=0.8. *<br />
 
-__Things have achieved__<br />
-- *Theorem 1: As the parameters of NN lifting go to the infinity, the K will converge (Done)*<br />
-- *Theorem 2: Error Boundary (Done)*<br />
-- *Simulation for NTVS identification (Done)*<br />
-- *Simulation for Cartpole with time-varying friction coefficient of the ground (Done)*<br />
+__Possible extension based on this data__<br />
+- *Change the dynamics by replacing the codes in main.py-data generation based on your research or projects.*<br />
+- *Add the control inputs following the paper.*<br />
+- *Develop various model-based control using the learning dynamics matrices A, B, and C and neural networks, see paper 'Han, Y., Hao, W., & Vaidya, U. (2020, December). Deep learning of Koopman representation for control. In 2020 59th IEEE Conference on Decision and Control (CDC) (pp. 1890-1895). IEEE.'*<br />
+
