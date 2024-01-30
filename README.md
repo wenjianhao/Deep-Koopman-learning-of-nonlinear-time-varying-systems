@@ -18,10 +18,10 @@ __Description__ <br />
 - __The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS)__ <br />
 
 __Dependencies__ <br />
-- *torch, numpy, os, scipy, matplotlib, joblib*
+- *torch, numpy, os, scipy, matplotlib, joblib.*
 
 __Method theory__<br />
-- *Koopman operator and deep learning*<br />
+- *Koopman operator and deep learning.*<br />
 
 __Usage__<br />
 - *Run main.py to learn and save the learned dynamics, then run the plot_comparison.py for results visualization and comparison.*<br />
