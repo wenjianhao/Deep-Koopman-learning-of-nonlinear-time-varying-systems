@@ -16,7 +16,7 @@ import os
 # Flags
 flags = dict(
     train = True,                            # Decide to start training or not
-    keep_train =  False,   #   True          # Keep training based on the previous model
+    keep_train =  False,   #   True          # Keep training based on the previous models
     plot_NN = False                         # Plot the structure of the lifting network and the decoder network
 )
 
@@ -36,7 +36,7 @@ files_dir = dict(
 # Important dimensions
 dimensions = dict(
     dim_states  = 2,                # dimension of system states
-    dim_inputs  = 0,                # dimension of the lifting
+    dim_inputs  = 0,                # dimension of the control inputs
     dim_lifting = 6                 # dimension of the lifting
 )
 
