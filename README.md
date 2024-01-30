@@ -1,6 +1,8 @@
 # Paper codes of paper 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. "Deep Koopman learning of nonlinear time-varying systems." Automatica 159 (2024): 111372.'
 
-**This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University)** <br />
+__Description__ <br />
+- *Started at 09/2021, last Revision: Jan 2022.*
+- *Author: Wenjian Hao, AAE, PhD, Purdue University.*
 
 __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
@@ -8,10 +10,10 @@ __Third Dependencies__ <br />
 - *Python*
 
 __The goal of this project__ <br />
-- *Design the Optimal Controller for Nonlinear Time Varying systems (NTVS)*
+- *Learn the dynamics of nonlinear time-varying systems (NTVS)*
 
-__Current Method__<br />
-- *Machine Learning and Koopman Operator*<br />
+__Method theory__<br />
+- *Koopman Operator and deep learning*<br />
 
 __2 Folders__<br />
 - *Data Generating*<br />
