@@ -24,7 +24,7 @@ __Method theory__<br />
 - *Koopman operator and deep learning*<br />
 
 __Usage__<br />
-- *Run main.py to learn and save the learned dynamics, then run the plot_comparison for results visualization and comparison.*<br />
+- *Run main.py to learn and save the learned dynamics, then run the plot_comparison.py for results visualization and comparison.*<br />
 - *Parameters are defined in config.py.*<br />
 - *In folder '/SavedResults/', we include the plots data of the published paper, in particular, /SavedResults/SavedResults08/ contains the plots data with changing rate \gamma=0.8. *<br />
 
