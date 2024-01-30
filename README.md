@@ -1,6 +1,6 @@
-# Deep Koopman Representation for Nonlinear Time Varying Systems
+# Paper codes of paper 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. "Deep Koopman learning of nonlinear time-varying systems." Automatica 159 (2024): 111372.'
 
-**This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University), Bowen Huang (PosDoc, PNNL (Current), EE, PhD, IOWA STATE)** <br />
+**This project is started at 09/2021, Authors: Wenjian Hao (AAE, PhD, Purdue University)** <br />
 
 __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
