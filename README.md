@@ -21,14 +21,15 @@ __Third Dependencies__ <br />
 - *torch, numpy, os, scipy, matplotlib, joblib*
 
 __Method theory__<br />
-- *Koopman Operator and deep learning*<br />
+- *Koopman operator and deep learning*<br />
 
 __Usage__<br />
-- *Parameters are defined in config.py*<br />
+- *Run main.py to learn and save the learned dynamics, then run the plot_comparison for results visualization and comparison.*<br />
+- *Parameters are defined in config.py.*<br />
 - *In folder '/SavedResults/', we include the plots data of the published paper, in particular, /SavedResults/SavedResults08/ contains the plots data with changing rate \gamma=0.8. *<br />
 
 __Possible extension based on this data__<br />
-- *Change the dynamics by replacing the codes in main.py-data generation based on your research or projects.*<br />
-- *Add the control inputs following the paper.*<br />
+- *Change the dynamics by replacing the codes in block 'data generation' of main.py based on your research or projects.*<br />
+- *Add the control inputs following the paper (changes need to be made in utils.py).*<br />
 - *Develop various model-based control using the learning dynamics matrices A, B, and C and neural networks, see paper 'Han, Y., Hao, W., & Vaidya, U. (2020, December). Deep learning of Koopman representation for control. In 2020 59th IEEE Conference on Decision and Control (CDC) (pp. 1890-1895). IEEE.'*<br />
 
