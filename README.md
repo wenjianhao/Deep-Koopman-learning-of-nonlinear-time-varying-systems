@@ -4,7 +4,7 @@ __Description__ <br />
 - *Started at 09/2021, last Revision: Jan 2022.*
 - **Author: Wenjian Hao, PhD, AAE, Purdue University.**
 - *This code is about the first example in the paper, readers can refine the codes accordingly based on their research.*
-- *If the paper or codes help your research or other projects please cite @article{hao2024deep,
+- *If the paper or codes help your research or other projects please cite <br /> @article{hao2024deep,
   title={Deep Koopman learning of nonlinear time-varying systems},
   author={Hao, Wenjian and Huang, Bowen and Pan, Wei and Wu, Di and Mou, Shaoshuai},
   journal={Automatica},
