@@ -2,7 +2,7 @@
 
 __Description__ <br />
 - *Started at 09/2021, last Revision: Jan 2022.*
-- Author: Wenjian Hao, AAE, PhD, Purdue University.<br />
+- **Author: Wenjian Hao, AAE, PhD, Purdue University.**
 
 __Third Dependencies__ <br />
 - *Numpy, Pytorch, Casadi, CUDA, Control, Openai-Gym*
