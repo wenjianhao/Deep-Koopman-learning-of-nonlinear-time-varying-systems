@@ -13,7 +13,7 @@ __Description__ <br />
   pages={111372},<br />
   year={2024},<br />
   publisher={Elsevier}
-}.*
+}.
 
 - __The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS)__ <br />
 
