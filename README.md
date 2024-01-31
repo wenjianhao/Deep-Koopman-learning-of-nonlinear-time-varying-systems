@@ -31,5 +31,5 @@ __Usage__<br />
 __Possible extensions based on this codes__<br />
 - *Change the dynamics by replacing the codes in block 'data generation' of main.py based on your research or projects.*<br />
 - *Add the control inputs following the paper (changes need to be made in utils.py).*<br />
-- *Develop various model-based control using the learning dynamics matrices A, B, and C and neural networks, see paper 'Han, Y., Hao, W., & Vaidya, U. (2020, December). Deep learning of Koopman representation for control. In 2020 59th IEEE Conference on Decision and Control (CDC) (pp. 1890-1895). IEEE.'*<br />
+- *Develop various model-based control using the learning dynamics matrices A, B, and C and neural networks, see paper 'Han, Y., Hao, W., & Vaidya, U. (2020, December). Deep learning of Koopman representation for control. In 2020 59th IEEE Conference on Decision and Control (CDC) (pp. 1890-1895). IEEE.' for an example of developing model predictive control based on the learned deep Koopman model. *<br />
 
