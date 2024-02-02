@@ -4,7 +4,7 @@ Description: Paper codes of 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shao
 
 Author: Wenjian Hao, Purdue University
 
-This is a file contains all the functions.
+This is a file containing all the functions.
 
 Start at: Sep 2021
 Last Revision: Jan 2022
