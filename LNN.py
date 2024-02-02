@@ -4,7 +4,7 @@ Description: Paper codes of 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shao
 
 Author: Wenjian Hao, Purdue University
 
-This is a file is used to define the DNNs basis structure.
+This is a file used to define the DNNs basis structure.
 
 Start at: Sep 2021
 Last Revision: Jan 2022
