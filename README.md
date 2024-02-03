@@ -4,6 +4,7 @@ __Description__ <br />
 - *Started on Sep/2021, last revision on Jan/2022.*
 - **Author: Wenjian Hao, PhD, AAE, Purdue University.**
 - *This code is about the first example in the paper, readers can refine the codes accordingly based on their research.*
+- **The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS).**
 - If the paper or codes help your research or other projects please cite:<br />
 ```
   @article{hao2024deep,
@@ -16,8 +17,6 @@ __Description__ <br />
   publisher={Elsevier}
 }
 ```
-
-- __The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS).__ <br />
 
 __Dependencies__ <br />
 - *torch, numpy, os, scipy, matplotlib, joblib.*
