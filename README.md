@@ -6,13 +6,13 @@ __Description__ <br />
 - *This code is about the first example in the paper, readers can refine the codes accordingly based on their research.*
 - If the paper or codes help your research or other projects please cite:<br />
 ```
-  @article{hao2024deep,<br />
-  title={Deep Koopman learning of nonlinear time-varying systems},<br />
-  author={Hao, Wenjian and Huang, Bowen and Pan, Wei and Wu, Di and Mou, Shaoshuai},<br />
-  journal={Automatica},<br />
-  volume={159},<br />
-  pages={111372},<br />
-  year={2024},<br />
+  @article{hao2024deep,
+  title={Deep Koopman learning of nonlinear time-varying systems},
+  author={Hao, Wenjian and Huang, Bowen and Pan, Wei and Wu, Di and Mou, Shaoshuai},
+  journal={Automatica},
+  volume={159},
+  pages={111372},
+  year={2024},
   publisher={Elsevier}
 }
 ```
