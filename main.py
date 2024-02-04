@@ -56,6 +56,7 @@ if __name__ == "__main__":
     evaleigenv1 = np.empty((config.dimensions['dim_states'], numdyn), dtype=complex)
     Astk        = np.empty((config.dimensions['dim_lifting'], config.dimensions['dim_lifting'], numdyn))
     Cstk        = np.empty((config.dimensions['dim_states'], config.dimensions['dim_lifting'], numdyn))
+    Hisstk      = np.empty((config.dimensions['dim_lifting'], config.dimensions['dim_lifting'], numdyn))
     tvdmdstore  = []
 
     #================================
@@ -75,21 +76,24 @@ if __name__ == "__main__":
     # DKTV (the proposed algorithm)
     #=================================
     # initialization
-    DKTV        = DKTV_training(config)
-    A0, C0      = DKTV.pretrain_model(train_samples[:, 0:config.training_parameters['prebatch_size']+1], train_label[:, 0:config.training_parameters['prebatch_size']+1])
-    Astk[:,:,0] = A0
-    Cstk[:,:,0] = C0
+    DKTV          = DKTV_training(config)
+    A0, C0, His0  = DKTV.pretrain_model(train_samples[:, 0:config.training_parameters['prebatch_size']+1], train_label[:, 0:config.training_parameters['prebatch_size']+1])
+    Astk[:,:,0]   = A0
+    Cstk[:,:,0]   = C0
+    Hisstk[:,:,0] = His0
     # main algorithm
     dktvtemp = np.zeros((config.dimensions['dim_states'],1)) # record the prediction data
     DKTV = DKTV_training(config)
     for nd in range(1, numdyn):
-        tsam         = train_samples[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
-        tlab         = train_label[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
-        Ak, Ck       = DKTV.DKTV(Astk, tsam, tlab, config.training_parameters['batch_size'], nd)
-        Astk[:,:,nd] = Ak
-        Cstk[:,:,nd] = Ck
+        tsam           = train_samples[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
+        tlab           = train_label[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
+        Ak, Ck, Hisk   = DKTV.DKTV(Astk, Cstk, Hisstk, tsam, tlab, config.training_parameters['batch_size'], nd)
+        Astk[:,:,nd]   = Ak
+        Cstk[:,:,nd]   = Ck
+        Hisstk[:,:,nd] = Hisk
     # Save dynamics stacks for plotting
     joblib.dump(Astk, config.files_dir['fileastack'])
     joblib.dump(Cstk, config.files_dir['filecstack'])
+    joblib.dump(Hisstk, config.files_dir['filehiscstack'])
     
     print('Finished learning, please run plot_compare.py for results visualization')
