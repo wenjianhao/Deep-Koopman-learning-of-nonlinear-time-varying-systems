@@ -123,7 +123,7 @@ class DKTV_training(object):
       optimizer = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
       train_loss = []
       lifting.train()
-      # lifting xt and x(t+1)
+      # lifting xt and x(t+1) and update the dynamics matrices
       G_mat      = lifting(xnew)
       bar_G_mat  = lifting(ynew)          
       lambdatau  = torch.inverse(torch.eye(G_mat.T.size(dim=1)).to(self.training_device)+G_mat@His_mat_tau@G_mat.T)
