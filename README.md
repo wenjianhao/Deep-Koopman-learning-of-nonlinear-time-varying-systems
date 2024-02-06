@@ -4,7 +4,7 @@ __Description__ <br />
 - *Started on Sep/2021, last revision on Jan/2022.*
 - **Author: Wenjian Hao, PhD, AAE, Purdue University.**
 - *This code is about the first example in the paper, readers can refine the codes accordingly based on their research.*
-- **The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS) for optimal control design purpose.**
+- **The goal of this project is to learn the dynamics of various nonlinear time-varying systems (NTVS) for optimal control design purposes.**
 - If the paper or codes help your research or other projects please cite:<br />
 ```
   @article{hao2024deep,
@@ -32,5 +32,15 @@ __Usage__<br />
 __Possible extensions based on this codes__<br />
 - *Change the dynamics by replacing the codes in block 'data generation' of main.py based on your research or projects.*<br />
 - *Add the control inputs following the paper (changes need to be made in utils.py).*<br />
-- *Develop various model-based control using the learning dynamics matrices A, B, and C and neural networks, see paper 'Han, Y., Hao, W., & Vaidya, U. (2020, December). Deep learning of Koopman representation for control. In 2020 59th IEEE Conference on Decision and Control (CDC) (pp. 1890-1895). IEEE.' for an example of developing model predictive control based on the learned deep Koopman model.*<br />
+- *Develop various model-based controllers using the learning dynamics matrices and neural network basis function, see the following paper for the application examples.*<br />
+```
+@misc{hao2023deep,
+      title={Deep Koopman Learning of Nonlinear Time-Varying Systems}, 
+      author={Wenjian Hao and Bowen Huang and Wei Pan and Di Wu and Shaoshuai Mou},
+      year={2023},
+      eprint={2210.06272},
+      archivePrefix={arXiv},
+      primaryClass={eess.SY}
+}
+```
 
