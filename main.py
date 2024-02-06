@@ -83,7 +83,7 @@ if __name__ == "__main__":
     Hisstk[:,:,0] = His0
     # main algorithm
     dktvtemp = np.zeros((config.dimensions['dim_states'],1)) # record the prediction data
-    DKTV = DKTV_training(config)
+    DKTV     = DKTV_training(config)
     for nd in range(1, numdyn):
         tsam           = train_samples[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
         tlab           = train_label[:, 0:(config.training_parameters['prebatch_size']+nd*config.training_parameters['batch_size'])]
