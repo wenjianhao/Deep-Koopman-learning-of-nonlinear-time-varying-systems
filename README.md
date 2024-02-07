@@ -1,4 +1,4 @@
-# Codes of paper *'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. "Deep Koopman learning of nonlinear time-varying systems." Automatica 159 (2024): 111372.'*
+# Codes of paper *'Wenjian Hao, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. "Deep Koopman learning of nonlinear time-varying systems." Automatica 159 (2024): 111372.'*
 
 __Description__ <br />
 - *Started on Sep/2021, last revision on Jan/2022.*
