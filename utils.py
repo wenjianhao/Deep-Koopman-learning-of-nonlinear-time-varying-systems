@@ -6,8 +6,8 @@ Author: Wenjian Hao, AAE, Purdue University.
 
 This is a file containing all the functions.
 
-Start at: Sep 2021
-Last Revision: Jan 2022
+Start at: Sep 2021.
+Last Revision: Jan 2022.
 '''
 
 import torch
