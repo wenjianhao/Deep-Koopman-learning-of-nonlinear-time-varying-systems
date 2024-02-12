@@ -4,8 +4,8 @@ Description: Paper codes of 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shao
 
 Author: Wenjian Hao, AAE, Purdue University.
 
-Start at: Sep 2021
-Last Revision: Jan 2022
+Start at: Sep 2021.
+Last Revision: Jan 2022.
 
 Training data format:
  | x_1(1) x_1(2) ... x_1(t) |
