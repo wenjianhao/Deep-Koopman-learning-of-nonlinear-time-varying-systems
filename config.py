@@ -2,7 +2,7 @@
 Description: Paper codes of 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shaoshuai Mou. "Deep Koopman learning of nonlinear time-varying systems." 
                             Automatica 159 (2024): 111372.'
 
-Author: Wenjian Hao, Purdue University.
+Author: Wenjian Hao, AAE, Purdue University.
 
 This is a configuration file.
 
