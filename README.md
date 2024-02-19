@@ -19,7 +19,7 @@ __Description__ <br />
 ```
 
 __Dependencies__ <br />
-- *torch, numpy, os, scipy, matplotlib, joblib.*
+- *torch, numpy, os, scipy, matplotlib, joblib, odmd.*
 
 __Methodologies__<br />
 - *Koopman operator and deep learning.*<br />
