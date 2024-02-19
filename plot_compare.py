@@ -17,8 +17,7 @@ import joblib
 import numpy as np
 import matplotlib.pyplot as plt
 
-from LNN import LNN
-from LNNsl import LNNsl
+from LNN import LNN, LNNsl
 from numpy import linalg as LA
 
 # load files and model
