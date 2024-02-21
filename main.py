@@ -60,7 +60,7 @@ if __name__ == "__main__":
     tvdmdstore  = []
 
     #================================
-    # comparison algorithm of TVDMD
+    # TVDMD (the comparison algorithm)
     #================================
     odmd = OnlineDMD(config.dimensions['dim_states'], 1.0)
     odmd.initialize(x[:, :config.training_parameters['prebatch_size']], y[:, :config.training_parameters['prebatch_size']])
