@@ -36,7 +36,7 @@ files_dir = dict(
 
 # Important dimensions
 dimensions = dict(
-    dim_states  = 2,                # dimension of system states
+    dim_states  = 2,                # dimension of the system states
     dim_inputs  = 0,                # dimension of the control inputs
     dim_lifting = 6                 # dimension of the lifting
 )
