@@ -17,7 +17,7 @@ class ToyEx(object):
     def __init__(self, inistate, simtime, dt):
         '''
         This sim env is a very simple time varying linear dynamical system
-        x(t)_dot = A(t) x(t), where, A(t) = [0, 1+w*t; -(1+w*t), 0]
+        x(t)_dot = A(t) x(t), where, A(t) = [0, 1+\gamma*t; -(1+\gamma*t), 0]
         '''
         # parameters
         # self.gamma = 1e-1
