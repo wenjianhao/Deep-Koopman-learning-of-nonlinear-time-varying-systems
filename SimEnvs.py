@@ -20,15 +20,15 @@ class ToyEx(object):
         x(t)_dot = A(t) x(t), where, A(t) = [0, 1+w*t; -(1+w*t), 0]
         '''
         # parameters
-        # self.epsilon = 1e-1
-        self.epsilon = 6
+        # self.gamma = 1e-1
+        self.gamma = 6 # a constant that descides how fast the dynamics is changing
         self.tspan = np.linspace(0, simtime, int(simtime/dt+1))
         self.dt = dt
         self.x0 = inistate
 
     def dyn(self, x, t):
         x1, x2 = np.cos(x)
-        dxdt = [(1+self.epsilon*t)*x2, -(1+self.epsilon*t)*x1]
+        dxdt = [(1+self.gamma*t)*x2, -(1+self.gamma*t)*x1]
         return dxdt 
 
     def sim(self):
@@ -41,6 +41,6 @@ class ToyEx(object):
         A = np.empty((n, n, m))
         evals = np.empty((n, m), dtype=complex)
         for k in range(m):
-            A[:, :, k] = np.array([[0, (1+self.epsilon*t[k])], [-(1+self.epsilon*t[k]), 0]])
+            A[:, :, k] = np.array([[0, (1+self.gamma*t[k])], [-(1+self.gamma*t[k]), 0]])
             evals[:, k] = np.linalg.eigvals(A[:, :, k])
         return x, y, evals
