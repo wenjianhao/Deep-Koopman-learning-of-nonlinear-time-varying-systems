@@ -18,10 +18,6 @@ import torch.optim as optim
 from LNN import LNN
 from torchsummary import summary
 
-
-#=====================
-# training loop
-#=====================
 class DKTV_training(object):
     '''
     Deep Koopman learning for nonlinear time-varying systems
@@ -68,6 +64,7 @@ class DKTV_training(object):
       lifting.to(self.training_device)
       # choose the training optimizer
       optimizer  = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
+      #---------------------------------------------- Training loop ----------------------------------------------
       train_loss = []
       lifting.train()
       for i in range(self.training_epoch):
@@ -131,6 +128,7 @@ class DKTV_training(object):
       C_mat_tau1 = C_mat_tau + (torch.t(xnew) - C_mat_tau@G_mat.T)@lambdatau@G_mat@His_mat_tau
       # get the K matrix in paper
       AC_mat = torch.cat((A_mat_tau1, C_mat_tau1), 0).to(self.training_device)
+      #---------------------------------------------- Training loop ----------------------------------------------
       for i in range(self.training_epoch):
           # lifting xt and x(t+1)
           G_mat     = lifting(xnew)
@@ -155,10 +153,8 @@ class DKTV_training(object):
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
             break
       return A_mat_tau1.cpu().detach().numpy(), C_mat_tau1.cpu().detach().numpy(), data_his_c.cpu().detach().numpy()
-    
-    #=====================
-    # loss functions
-    #=====================
+
+    #---------------------------------------------- loss functions ----------------------------------------------
     def linearize_loss(self, AC_mat, G_mat, bar_G_mat, xnew):
       label = torch.cat((bar_G_mat.T, xnew.T), 0)
       p1 = AC_mat[0:self.dim_lifting, :] @ G_mat.T
