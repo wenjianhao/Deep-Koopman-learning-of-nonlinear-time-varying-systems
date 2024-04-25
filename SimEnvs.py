@@ -21,26 +21,26 @@ class ToyEx(object):
         '''
         # parameters
         # self.gamma = 1e-1
-        self.gamma = 6 # a constant that descides how fast the dynamics is changing
-        self.tspan = np.linspace(0, simtime, int(simtime/dt+1))
-        self.dt = dt
-        self.x0 = inistate
+        self.gamma   = 6 # a constant that descides how fast the dynamics is changing
+        self.tspan   = np.linspace(0, simtime, int(simtime/dt+1))
+        self.dt      = dt
+        self.x0      = inistate
 
     def dyn(self, x, t):
         x1, x2 = np.cos(x)
-        dxdt = [(1+self.gamma*t)*x2, -(1+self.gamma*t)*x1]
+        dxdt   = [(1+self.gamma*t)*x2, -(1+self.gamma*t)*x1]
         return dxdt 
 
     def sim(self):
         xsol = odeint(self.dyn, self.x0, self.tspan).T
         # extract snapshots
         x, y = xsol[:, :-1], xsol[:, 1:]
-        t = self.tspan[1:]
+        t    = self.tspan[1:]
         # true dynamics, true eigenvalues
-        n, m = len(x[:, 0]), len(x[0, :])
-        A = np.empty((n, n, m))
+        n, m  = len(x[:, 0]), len(x[0, :])
+        A     = np.empty((n, n, m))
         evals = np.empty((n, m), dtype=complex)
         for k in range(m):
-            A[:, :, k] = np.array([[0, (1+self.gamma*t[k])], [-(1+self.gamma*t[k]), 0]])
+            A[:, :, k]  = np.array([[0, (1+self.gamma*t[k])], [-(1+self.gamma*t[k]), 0]])
             evals[:, k] = np.linalg.eigvals(A[:, :, k])
         return x, y, evals
