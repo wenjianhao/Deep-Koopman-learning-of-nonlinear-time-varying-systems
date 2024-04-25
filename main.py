@@ -21,9 +21,7 @@ Training data format:
  t: time index, t = 0, 1, 2, ...
 '''
 
-#=====================
-# Load third packages
-#=====================
+#---------------------------------------------- Load third packages ----------------------------------------------
 import config
 import joblib
 
@@ -34,9 +32,7 @@ from odmd import OnlineDMD
 from utils import DKTV_training
 
 if __name__ == "__main__":
-    #=====================
-    # data generation
-    #=====================
+    #---------------------------------------------- Data generation ----------------------------------------------
     x0                = [1, 0]
     dt                = 0.1
     SimTime           = 30
@@ -59,9 +55,7 @@ if __name__ == "__main__":
     Hisstk      = np.empty((config.dimensions['dim_lifting'], config.dimensions['dim_lifting'], numdyn))
     tvdmdstore  = []
 
-    #================================
-    # TVDMD (the comparison algorithm)
-    #================================
+    #---------------------------------------------- TVDMD (the comparison algorithm) ----------------------------------------------
     odmd = OnlineDMD(config.dimensions['dim_states'], 1.0)
     odmd.initialize(x[:, :config.training_parameters['prebatch_size']], y[:, :config.training_parameters['prebatch_size']])
     for k in range(config.training_parameters['prebatch_size'], len(train_samples[0])):
@@ -72,9 +66,7 @@ if __name__ == "__main__":
     joblib.dump(x, config.files_dir['xfile'])
     joblib.dump(tvdmdstore, config.files_dir['tvdpred'])
 
-    #=================================
-    # DKTV (the proposed algorithm)
-    #=================================
+    #---------------------------------------------- DKTV (the proposed algorithm) ----------------------------------------------
     # initialization
     DKTV          = DKTV_training(config)
     A0, C0, His0  = DKTV.pretrain_model(train_samples[:, 0:config.training_parameters['prebatch_size']+1], train_label[:, 0:config.training_parameters['prebatch_size']+1])
