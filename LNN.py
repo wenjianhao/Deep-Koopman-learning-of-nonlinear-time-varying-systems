@@ -15,6 +15,7 @@ import torch
 import numpy as np
 import torch.nn as nn
 
+# DNN basis function for Koopman operator
 class LNN(nn.Module):
     def __init__(self, dim_input, dim_output):
         super(LNN, self).__init__()
@@ -38,6 +39,7 @@ class LNN(nn.Module):
         output = self.psi_hidden_layers(input)
         return output
 
+# For comparison
 class LNNsl(nn.Module):
     def __init__(self, dim_input, dim_output):
         super(LNNsl, self).__init__()
