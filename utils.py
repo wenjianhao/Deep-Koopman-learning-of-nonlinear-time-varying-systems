@@ -77,7 +77,7 @@ class DKTV_training(object):
           # get the K matrix in paper
           AC_mat = torch.cat((A_mat, C_mat), 0).to(self.training_device)
           # loss1 is the linear lifting loss
-          L_f = self.linearize_loss(AC_mat.detach(), G_mat, bar_G_mat, X_mat)
+          L_f        = self.linearize_loss(AC_mat.detach(), G_mat, bar_G_mat, X_mat)
           total_loss = L_f
           # gradient descent
           optimizer.zero_grad()
@@ -117,7 +117,7 @@ class DKTV_training(object):
       C_mat_tau   = torch.FloatTensor(Cstk[:,:,(nd-1)]).to(self.training_device)
       His_mat_tau = torch.FloatTensor(Hisstk[:,:,(nd-1)]).to(self.training_device)
       # choose the training optimizer
-      optimizer = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
+      optimizer  = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
       train_loss = []
       lifting.train()
       # lifting xt and x(t+1) and update the dynamics matrices
@@ -144,22 +144,22 @@ class DKTV_training(object):
           min_loss = min(train_loss)
           if total_loss.cpu().detach().numpy() <= min_loss: 
             data_his_c  = torch.inverse(G_mat.T@G_mat)  
-            state = {'model_lifting': lifting.state_dict()}
+            state       = {'model_lifting': lifting.state_dict()}
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
             print("Saved min loss model, loss: ", total_loss.cpu().detach().numpy())
           if total_loss <= self.eps:
             data_his_c  = torch.inverse(G_mat.T@G_mat)
-            state = {'model_lifting': lifting.state_dict()}
+            state       = {'model_lifting': lifting.state_dict()}
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
             break
       return A_mat_tau1.cpu().detach().numpy(), C_mat_tau1.cpu().detach().numpy(), data_his_c.cpu().detach().numpy()
 
     #---------------------------------------------- loss functions ----------------------------------------------
     def linearize_loss(self, AC_mat, G_mat, bar_G_mat, xnew):
-      label = torch.cat((bar_G_mat.T, xnew.T), 0)
-      p1 = AC_mat[0:self.dim_lifting, :] @ G_mat.T
-      p2 = AC_mat[self.dim_lifting:, :] @ G_mat.T
+      label      = torch.cat((bar_G_mat.T, xnew.T), 0)
+      p1         = AC_mat[0:self.dim_lifting, :] @ G_mat.T
+      p2         = AC_mat[self.dim_lifting:, :] @ G_mat.T
       prediction = torch.cat((p1, p2), 0)
-      lossfunc = torch.nn.MSELoss()
-      L_f = lossfunc(prediction, label)
+      lossfunc   = torch.nn.MSELoss()
+      L_f        = lossfunc(prediction, label)
       return L_f
