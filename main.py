@@ -88,4 +88,4 @@ if __name__ == "__main__":
     joblib.dump(Cstk, config.files_dir['filecstack'])
     joblib.dump(Hisstk, config.files_dir['filehiscstack'])
     
-    print('Finished learning, please run plot_compare.py for results visualization')
+    print('Finished learning, please run plot_compare.py for results visualization)
