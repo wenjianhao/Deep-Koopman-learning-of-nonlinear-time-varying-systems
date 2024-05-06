@@ -84,9 +84,8 @@ class DKTV_training(object):
           total_loss.backward()
           optimizer.step()
           # only saving the model with the lowest loss
-          train_loss.append(total_loss.cpu().detach().numpy())
-          min_loss = min(train_loss)
-          if total_loss.cpu().detach().numpy() <= min_loss:
+          train_loss.append(total_loss.cpu().detach().numpy()) 
+          if total_loss.cpu().detach().numpy() <= min(train_loss):
               data_his_c  = torch.inverse(G_mat.T@G_mat)    
               state       = {'model_lifting': lifting.state_dict()}
               torch.save(state, (self.results_path+'nnbasis/'+str(0)+self.model_saved_name))
@@ -141,8 +140,7 @@ class DKTV_training(object):
           optimizer.step()
           # only saving the model with the lowest loss
           train_loss.append(total_loss.cpu().detach().numpy())
-          min_loss = min(train_loss)
-          if total_loss.cpu().detach().numpy() <= min_loss: 
+          if total_loss.cpu().detach().numpy() <= min(train_loss): 
             data_his_c  = torch.inverse(G_mat.T@G_mat)  
             state       = {'model_lifting': lifting.state_dict()}
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
