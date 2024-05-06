@@ -83,7 +83,7 @@ if __name__ == "__main__":
         Astk[:,:,nd]   = Ak
         Cstk[:,:,nd]   = Ck
         Hisstk[:,:,nd] = Hisk
-    # Save dynamics stacks for plotting
+    # save dynamics stacks for plotting
     joblib.dump(Astk, config.files_dir['fileastack'])
     joblib.dump(Cstk, config.files_dir['filecstack'])
     joblib.dump(Hisstk, config.files_dir['filehiscstack'])
