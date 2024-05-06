@@ -152,7 +152,7 @@ class DKTV_training(object):
             break
       return A_mat_tau1.cpu().detach().numpy(), C_mat_tau1.cpu().detach().numpy(), data_his_c.cpu().detach().numpy()
 
-    #---------------------------------------------- loss functions ----------------------------------------------
+    #---------------------------------------------- Loss functions ----------------------------------------------
     def linearize_loss(self, AC_mat, G_mat, bar_G_mat, xnew):
       label      = torch.cat((bar_G_mat.T, xnew.T), 0)
       p1         = AC_mat[0:self.dim_lifting, :] @ G_mat.T
