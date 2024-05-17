@@ -16,7 +16,7 @@ import os
 #---------------------------------------------- Flags ----------------------------------------------
 flags = dict(
     train      = True,                         # Decide to start training or not
-    keep_train =  False,   #   True            # Keep training based on the previous model
+    keep_train = False,   #   True            # Keep training based on the previous model
     plot_NN    = False                         # Plot the structure of the lifting network and the decoder network
 )
 
