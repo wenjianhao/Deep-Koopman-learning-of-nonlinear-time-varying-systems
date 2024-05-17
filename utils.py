@@ -86,8 +86,8 @@ class DKTV_training(object):
           # only saving the model with the lowest loss
           train_loss.append(total_loss.cpu().detach().numpy()) 
           if total_loss.cpu().detach().numpy() <= min(train_loss):
-              data_his_c  = torch.inverse(G_mat.T@G_mat)    
-              state       = {'model_lifting': lifting.state_dict()}
+              data_his_c = torch.inverse(G_mat.T@G_mat)    
+              state      = {'model_lifting': lifting.state_dict()}
               torch.save(state, (self.results_path+'nnbasis/'+str(0)+self.model_saved_name))
               print("Saved min loss model, loss: ", total_loss.cpu().detach().numpy())
           # break if the esitimation accuracy is satisfied
@@ -141,13 +141,13 @@ class DKTV_training(object):
           # only saving the model with the lowest loss
           train_loss.append(total_loss.cpu().detach().numpy())
           if total_loss.cpu().detach().numpy() <= min(train_loss): 
-            data_his_c  = torch.inverse(G_mat.T@G_mat)  
-            state       = {'model_lifting': lifting.state_dict()}
+            data_his_c = torch.inverse(G_mat.T@G_mat)  
+            state      = {'model_lifting': lifting.state_dict()}
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
             print("Saved min loss model, loss: ", total_loss.cpu().detach().numpy())
           if total_loss <= self.eps:
-            data_his_c  = torch.inverse(G_mat.T@G_mat)
-            state       = {'model_lifting': lifting.state_dict()}
+            data_his_c = torch.inverse(G_mat.T@G_mat)
+            state      = {'model_lifting': lifting.state_dict()}
             torch.save(state, (self.results_path+'nnbasis/'+str(nd)+self.model_saved_name))
             break
       return A_mat_tau1.cpu().detach().numpy(), C_mat_tau1.cpu().detach().numpy(), data_his_c.cpu().detach().numpy()
