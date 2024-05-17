@@ -63,7 +63,7 @@ class DKTV_training(object):
       bar_X_mat = torch.t(torch.FloatTensor(bar_X_mat).to(self.training_device))
       lifting.to(self.training_device)
       # choose the training optimizer
-      optimizer  = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
+      optimizer = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
       #---------------------------------------------- Training loop ----------------------------------------------
       train_loss = []
       lifting.train()
