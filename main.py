@@ -5,6 +5,7 @@ Description: Paper codes of 'Hao, Wenjian, Bowen Huang, Wei Pan, Di Wu, and Shao
 Author: Wenjian Hao, AAE, Purdue University.
 
 Start at: Sep 2021.
+
 Last Revision: Jan 2022.
 
 Training data format:
@@ -14,10 +15,10 @@ Training data format:
  | x_n(1) x_n(2) ... x_n(t) |
  | u_1(1) u_1(2) ... u_1(t) |
  | ...    ...    ...    ... |
- | u_m(1) u_m(2) ... u_m(t) |
- where,
- n: the dimension of the system states
- m: the dimension of the control inputs
+ | u_m(1) u_m(2) ... u_m(t) |,
+ where
+ n: the dimension of the system states,
+ m: the dimension of the control inputs,
  t: time index, t = 0, 1, 2, ...
 '''
 
@@ -33,6 +34,7 @@ from utils import DKTV_training
 
 if __name__ == "__main__":
     #---------------------------------------------- Data generation ----------------------------------------------
+    # simulation parameters
     x0                = [1, 0]
     dt                = 0.1
     SimTime           = 30
