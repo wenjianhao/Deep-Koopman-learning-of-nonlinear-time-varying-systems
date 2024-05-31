@@ -38,7 +38,7 @@ class LNN(nn.Module):
         output = self.psi_hidden_layers(input)
         return output
 
-# For comparison
+# for comparison with the MLP method
 class LNNsl(nn.Module):
     def __init__(self, dim_input, dim_output):
         super(LNNsl, self).__init__()
