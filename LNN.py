@@ -7,6 +7,7 @@ Author: Wenjian Hao, AAE, Purdue University.
 This is a file used to define the DNNs basis structure.
 
 Start at: Sep 2021.
+
 Last Revision: Jan 2022.
 '''
 
@@ -25,13 +26,11 @@ class LNN(nn.Module):
         self.hidd2size = 256
         self.outputsize = dim_output
         self.psi_hidden_layers = nn.Sequential(
-
             nn.Linear(self.inputsize, self.hidd1size, bias=True),
             nn.ReLU(),
             nn.Linear(self.hidd1size, self.hidd2size, bias=True),
             nn.ReLU(),
             nn.Linear(self.hidd2size, self.outputsize, bias=True)
-            
         )
         
     def forward(self, input, Test=False):  
@@ -49,7 +48,6 @@ class LNNsl(nn.Module):
         self.hidd2size = 32
         self.outputsize = dim_output
         self.psi_hidden_layers = nn.Sequential(
-
             nn.Linear(self.inputsize, self.hidd1size, bias=True),
             nn.ReLU(),
             # nn.Sigmoid(),
