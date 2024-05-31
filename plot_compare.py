@@ -7,10 +7,11 @@ Author: Wenjian Hao, AAE, Purdue University.
 This file is used for results visualization and comparison.
 
 Start at: Sep 2021.
+
 Last Revision: Jan 2022.
 '''
 
-# some third packages
+# load the third party packages
 import torch
 import joblib
 
@@ -20,7 +21,7 @@ import matplotlib.pyplot as plt
 from LNN import LNN, LNNsl
 from numpy import linalg as LA
 
-# load files and model
+# load results files and models
 savedemo         = 'SavedResults/dktvdemo.pkl'
 load_name        = 'SavedResults/nnbasis/'
 model_saved_name = 'liftnetwork.pth'
@@ -66,7 +67,6 @@ Astack8     = joblib.load(fileastack8)
 Cstack8     = joblib.load(filecstack8)
 truestate8  = joblib.load(xfile8)
 tvdmdstore8 = joblib.load(tvdpred8)
-
 dkstore8 = []
 DKbasis8 = LNNsl(dim_input=2, dim_output=6)
 for i in range(beta0, truestate8.shape[1]):
@@ -93,11 +93,13 @@ truemax1 = max(truestate[0, beta0+1:])
 truemax2 = max(truestate[1, beta0+1:])
 truemin1 = min(truestate[1, beta0+1:])
 truemin2 = min(truestate[1, beta0+1:])
+# accumulative average
 for i in range(1,e1.shape[0]+1):
     e1bar[i-1] = sum(e1[0:i])/(i)
     e2bar[i-1] = sum(e2[0:i])/(i)
     emax[i-1]  = np.sqrt(max((truemax1 - truestate[0, beta0+i]), (truestate[0, beta0+i]-truemin1))**2 
     + max((truemax2 - truestate[1, beta0+i]), (truestate[1, beta0+i]-truemin2))**2)
+  
 #---------------------------------------------- Plots ----------------------------------------------
 plt.rcParams['figure.dpi'] = 100
 plt.figure(figsize=(6, 4.3))
