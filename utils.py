@@ -7,6 +7,7 @@ Author: Wenjian Hao, AAE, Purdue University.
 This is a file containing all the functions.
 
 Start at: Sep 2021.
+
 Last Revision: Jan 2022.
 '''
 
@@ -64,6 +65,7 @@ class DKTV_training(object):
       lifting.to(self.training_device)
       # choose the training optimizer
       optimizer = optim.Adam(lifting.parameters(), lr=self.learning_rate, weight_decay = self.decay_rate)
+      
       #---------------------------------------------- Training loop ----------------------------------------------
       train_loss = []
       lifting.train()
@@ -127,6 +129,7 @@ class DKTV_training(object):
       C_mat_tau1 = C_mat_tau + (torch.t(xnew) - C_mat_tau@G_mat.T)@lambdatau@G_mat@His_mat_tau
       # get the K matrix in paper
       AC_mat = torch.cat((A_mat_tau1, C_mat_tau1), 0).to(self.training_device)
+      
       #---------------------------------------------- Training loop ----------------------------------------------
       for i in range(self.training_epoch):
           # lifting xt and x(t+1)
