@@ -7,8 +7,8 @@ Author: Wenjian Hao, AAE, Purdue University.
 This is a configuration file.
 
 Start at: Sep 2021.
+
 Last Revision: Jan 2022.
-    
 '''
 
 import os
