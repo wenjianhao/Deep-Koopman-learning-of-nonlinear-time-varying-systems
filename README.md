@@ -33,14 +33,4 @@ __Possible extensions based on this codes__<br />
 - *Change the dynamics by replacing the codes in block 'data generation' of main.py based on your research or projects.*<br />
 - *Add the control inputs following the paper (changes need to be made in utils.py).*<br />
 - *Develop various model-based controllers using the learning dynamics matrices and neural network basis function, see the following paper for the application examples.*<br />
-```
-@misc{hao2023deep,
-      title={Deep Koopman Learning of Nonlinear Time-Varying Systems}, 
-      author={Wenjian Hao and Bowen Huang and Wei Pan and Di Wu and Shaoshuai Mou},
-      year={2023},
-      eprint={2210.06272},
-      archivePrefix={arXiv},
-      primaryClass={eess.SY}
-}
-```
 
